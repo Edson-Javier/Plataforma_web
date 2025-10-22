@@ -1,4 +1,22 @@
 <?php
+
+//Funcion a llamar de este archivo
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once __DIR__ . "/Conexion/funciones/obtener.php"; 
+
+//Variables para la llamada a la base de datos
+
+$tabla = "lista";
+$campos = ["id", "nombre", "apellido", "correo", "rol"];
+$condicion = "eliminar = 0";
+
+$empleados = obtener_campos($tabla, $campos , $condicion);
+
+// Contar el total
+$total = count($empleados);
+
 //Revela el rol del usuario
 function revela_rol($rol) {
     $roles = [
@@ -40,15 +58,15 @@ function revela_rol($rol) {
                 </thead>
                 <tbody>
                     <?php if ($total > 0): ?>
-                        <?php while($row = $result->fetch_assoc()): ?>
+                        <?php foreach ($empleados as $row): ?>
                             <tr>
-                                <td><?php echo $row["id"]; ?></td>
-                                <td><?php echo $row["nombre"]; ?></td>
-                                <td><?php echo $row["apellido"]; ?></td>
-                                <td><?php echo $row["correo"]; ?></td>
+                                <td><?php echo htmlspecialchars($row["id"]); ?></td>
+                                <td><?php echo htmlspecialchars($row["nombre"]); ?></td>
+                                <td><?php echo htmlspecialchars($row["apellido"]);  ?></td>
+                                <td><?php echo htmlspecialchars($row["correo"]); ?></td>
                                 <td><?php echo revela_rol($row["rol"]); ?></td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
                             <td colspan="8">No hay empleados registrados</td>
