@@ -60,3 +60,31 @@ tbody tr:hover {
     background: #f1f1f1;
 }
 
+/* Resaltar la fila seleccionada */
+tr.seleccionada { 
+    background-color: #d0e7ff; 
+}
+
+/* Efecto hover al pasar el mouse */
+tr:hover { 
+    cursor: pointer; 
+    background-color: #f0f0f0; 
+}
+
+/* Estilo de los botones */
+.btn { 
+    margin-right: 5px; 
+    padding: 5px 10px; 
+    text-decoration: none; 
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}

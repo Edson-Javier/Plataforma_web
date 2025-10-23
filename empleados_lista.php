@@ -40,13 +40,32 @@ function revela_rol($rol) {
 <body>
     <div class="container">
         <h1>Listado de empleados (<?php echo $total; ?>)</h1>
-        <a class="btn" href="empleados_alta.php">Crear nuevo registro</a>
-        <a class="btn" href="empleados_detalle.php">Ver detalles de registro</a>
-        <a class="btn" href="empleados_editar.php">Editar registro</a>
-        <a class="btn" href="empleados_eliminar.php">Eliminar registro</a>
+
+        <a class="btn" href="empleados_alta.php">Crear registro</a>
+
+        <!--Fromularios para botones que necesitan ID -->
+        
+        <form id="form_detalle" action="empleados_detalle.php" method="POST" style="display:inline;"
+        onsubmit="return verificarSeleccion('form_detalle')">
+            <input type="hidden" name="empleado_id" id="detalle_id">
+            <button type="submit" class="btn">Ver detalles</button>
+        </form>
+        
+        <form id="form_editar" action="empleados_editar.php" method="POST" style="display: inline;"
+        onsubmit="return verificarSeleccion('form_detalle')">
+            <input type="hidden" name="empleado_id" id="editar_id">
+            <button type="submit" class="btn" >Editar registro</button>
+        </form>
+
+
+        <form id="form_eliminar" action="empleados_eliminar.php" method="POST" style="display:inline;"
+        onsubmit="return verificarSeleccion('form_detalle')">
+            <input type="hidden" name="empleado_id" id="eliminar_id">
+            <button type="submit" class="btn">Eliminar registro</button>
+        </form>
         
         <div class="tabla-container">
-            <table>
+            <table id="tablaEmpleados" >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -59,7 +78,7 @@ function revela_rol($rol) {
                 <tbody>
                     <?php if ($total > 0): ?>
                         <?php foreach ($empleados as $row): ?>
-                            <tr>
+                            <tr data-id="<?php echo $row['id']; ?>">
                                 <td><?php echo htmlspecialchars($row["id"]); ?></td>
                                 <td><?php echo htmlspecialchars($row["nombre"]); ?></td>
                                 <td><?php echo htmlspecialchars($row["apellido"]);  ?></td>
@@ -69,13 +88,15 @@ function revela_rol($rol) {
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="8">No hay empleados registrados</td>
+                            <td colspan="5">No hay empleados registrados</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
+    <script src="empleados_lista.js"></script>
+
 </body>
 </html>
 
