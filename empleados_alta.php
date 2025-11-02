@@ -15,7 +15,7 @@ $id = id_nuevo($tabla);
     <head>
         <meta charset="UTF-8">
         <title>Formularios</title>
-        <link rel="stylesheet" href="empleados_alta.css">
+        <link rel="stylesheet" href="empleados_formulario.css">
         <script src="empleados_alta.js" defer></script>
     </head>
 
