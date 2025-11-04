@@ -2,10 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("Form_index");
     const mensaje = document.getElementById("mensaje");
 
-    // --- Previsualización de imagen ---
-    const previewText = document.getElementById("preview-text");
-
-
     // --- Envío del formulario con AJAX ---
     form.addEventListener("submit", async (e) => {
         e.preventDefault(); // Evita el envío normal
@@ -59,8 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
             mensaje.classList.add(data.success ? "exito-mensaje" : "error-mensaje");
 
             // Limpiar formulario si fue exitoso
-            if (data.success) {
+            if (data.success && data.redirect) {
                 form.reset();
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                }, 1000);
             }
 
             // Borrar mensaje después de 5s
