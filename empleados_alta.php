@@ -32,7 +32,14 @@ $id = id_nuevo($tabla);
                 <input type="text" name="nombre" id="nombre" placeholder="Escribe tu nombre"><br>
                 <input type="text" name="apellido" id="apellido" placeholder="Escribe tu apellido"><br>
                 <input type="text" name="correo" id="correo" placeholder="Escribe tu correo"><br>
-                <input type="text" name="pass" id="pass" placeholder="Escribe tu contraseña"><br>
+                <input type="password" name="pass" id="pass" placeholder="Escribe tu contraseña"><br>
+                <div class="checkbox-container">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="mostrarpass">
+                    <span class="checkmark"></span>
+                    Mostrar contraseña
+                </label>
+                </div>
 
                 <select name="rol" id="rol">
                     <option value="0">Selecciona</option>

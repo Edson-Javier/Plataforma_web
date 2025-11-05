@@ -2,6 +2,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("Form_alta");
     const mensaje = document.getElementById("mensaje");
 
+    // --- Mostrar / ocultar contraseña ---
+    const passInput = document.getElementById("pass");
+    const mostrarPass = document.getElementById("mostrarpass");
+
+    if (mostrarPass && passInput) {
+        mostrarPass.addEventListener("change", () => {
+            passInput.type = mostrarPass.checked ? "text" : "password";
+        });
+    }
+
     // --- Previsualización de imagen ---
     const archivoInput = document.getElementById("archivo");
     const previewImg = document.getElementById("preview-img");
@@ -85,6 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 form.id.placeholder = data.nuevo_id;
                 previewImg.style.display = "none";
                 previewText.style.display = "block"; // Resetear preview
+                setTimeout(() => {
+                        window.location.href = data.redirect;
+                }, 1000);
             }
 
             // Borrar mensaje después de 5s

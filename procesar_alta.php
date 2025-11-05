@@ -20,7 +20,7 @@ $nombreArchivo = guardar_archivo('archivo', $ruta );
 $nombre   = $_POST['nombre'] ?? '';
 $apellido = $_POST['apellido'] ?? '';
 $correo   = $_POST['correo'] ?? '';
-$pass     = $_POST['pass'] ?? '';
+$pass     = password_hash($_POST['pass'], PASSWORD_BCRYPT) ?? '';
 $rol      = $_POST['rol'] ?? 0;
 
 //  Insertar en la base de datos
@@ -40,7 +40,8 @@ if (isset($_POST['nombre'])) {
     $response = [
         "success" => true,
         "message" => "Registro insertado correctamente",
-        "nuevo_id" => id_nuevo($tabla)
+        "nuevo_id" => id_nuevo($tabla),
+        'redirect' => 'empleados_lista.php'
     ];
 }
 

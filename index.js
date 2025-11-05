@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("Form_index");
     const mensaje = document.getElementById("mensaje");
+    // --- Mostrar / ocultar contraseña ---
+    const passInput = document.getElementById("pass");
+    const mostrarPass = document.getElementById("mostrarpass");
+
+    if (mostrarPass && passInput) {
+        mostrarPass.addEventListener("change", () => {
+            passInput.type = mostrarPass.checked ? "text" : "password";
+        });
+    }
+
 
     // --- Envío del formulario con AJAX ---
     form.addEventListener("submit", async (e) => {

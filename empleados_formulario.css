@@ -121,3 +121,67 @@ button:hover {
     border-radius: 6px;
     margin-bottom: 10px;
 }
+/* Estilo del contenedor del checkbox */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Ocultar el checkbox original */
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+/* Personalización visual del checkbox */
+.checkbox-label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    user-select: none;
+}
+
+/* Caja del check */
+.checkbox-label .checkmark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 2px solid #0078d7;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.checkbox-label:hover .checkmark {
+    background-color: #e6f0ff;
+}
+
+/* Cuando está marcado */
+.checkbox-label input:checked + .checkmark {
+    background-color: #0078d7;
+    border-color: #0078d7;
+}
+
+/* Icono del check (✓) */
+.checkbox-label .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Mostrar el icono cuando está marcado */
+.checkbox-label input:checked + .checkmark::after {
+    display: block;
+}
