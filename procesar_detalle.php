@@ -13,13 +13,13 @@ if (!isset($_POST["id"])) {
 
 $id = intval($_POST["id"]);
 $tabla = "lista";
-$columnas = ["id", "nombre", "apellido", "correo", "pass", "rol", "imagen"];
+$columnas = ["id", "nombre", "apellido", "correo", "rol", "imagen", "eliminar"];
 $condicion = "id = '$id'";
 
 $empleado = obtener_campos($tabla, $columnas, $condicion);
 
-if ($empleado) {
-    echo json_encode($empleado);
+if ($empleado && count($empleado) > 0) {
+    echo json_encode($empleado[0]); 
 } else {
     echo json_encode(["error" => "Empleado no encontrado"]);
 }
