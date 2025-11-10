@@ -25,7 +25,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("nombre").value = data.nombre || "";
         document.getElementById("apellido").value = data.apellido || "";
         document.getElementById("correo").value = data.correo || "";
-        document.getElementById("estado").value = data.eliminar || "";
+        if (data.eliminar == 0) {
+         document.getElementById("estado").value = "Estado : ACTIVO" || "";   
+        }else{
+            document.getElementById("estado").value = "Estado : INACTIVO" || "";
+        }
         document.getElementById("rol").value = data.rol || "0";
 
         // Mostrar imagen
@@ -33,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const previewText = document.getElementById("preview-text");
 
         if (data.imagen) {
-            previewImg.src = `/archivos/${data.imagen}`;
+            previewImg.src = `archivos/${data.imagen}`;
             previewImg.style.display = "block";
             previewText.style.display = "none";
         } else {

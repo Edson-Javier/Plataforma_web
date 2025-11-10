@@ -52,14 +52,14 @@ function revela_rol($rol) {
         </form>
         
         <form id="form_editar" action="empleados_editar.php" method="POST" style="display: inline;"
-        onsubmit="return verificarSeleccion('form_detalle')">
+        onsubmit="return verificarSeleccion('form_editar')">
             <input type="hidden" name="empleado_id" id="editar_id">
             <button type="submit" class="btn" >Editar registro</button>
         </form>
 
 
         <form id="form_eliminar" action="empleados_eliminar.php" method="POST" style="display:inline;"
-        onsubmit="return verificarSeleccion('form_detalle')">
+        onsubmit="return verificarSeleccion('form_eliminar')">
             <input type="hidden" name="empleado_id" id="eliminar_id">
             <button type="submit" class="btn">Eliminar registro</button>
         </form>

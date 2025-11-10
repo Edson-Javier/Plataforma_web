@@ -1,5 +1,55 @@
+document.addEventListener("DOMContentLoaded", async () => {
+    if (!empleadoId) {
+        console.error("No se recibió ningún ID desde PHP");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("accion", "obtener");
+    formData.append("id", empleadoId);
+
+    try {
+        const response = await fetch("procesar_editar.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            console.error(data.error);
+            return;
+        }
+
+        // Llenar el formulario
+        document.getElementById("id").value = data.id || "";
+        document.getElementById("nombre").value = data.nombre || "";
+        document.getElementById("apellido").value = data.apellido || "";
+        document.getElementById("correo").value = data.correo || "";
+
+        document.getElementById("rol").value = data.rol || "0";
+
+        // Mostrar imagen
+        const previewImg = document.getElementById("preview-img");
+        const previewText = document.getElementById("preview-text");
+
+        if (data.imagen) {
+            previewImg.src = `archivos/${data.imagen}`;
+            previewImg.style.display = "block";
+            previewText.style.display = "none";
+        } else {
+            previewImg.style.display = "none";
+            previewText.style.display = "block";
+        }
+
+    } catch (err) {
+        console.error("Error al obtener datos:", err);
+    }
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("Form_alta");
+    const form = document.getElementById("form_editar");
     const mensaje = document.getElementById("mensaje");
 
     // --- Mostrar / ocultar contraseña ---
@@ -39,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mensaje.innerHTML = "";
 
         // Obtener valores
+        const id       = form.querySelector("#id").value.trim();
         const nombre   = form.nombre.value.trim();
         const apellido = form.apellido.value.trim();
         const correo   = form.correo.value.trim();
@@ -52,10 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!apellido) errores.push("Falta el apellido.");
         if (!correo) errores.push("Falta el correo.");
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) errores.push("Correo inválido.");
-        if (!pass) errores.push("Falta la contraseña.");
-        else if (pass.length < 6) errores.push("Contraseña mínima 6 caracteres.");
+        //if (!pass) errores.push("Falta la contraseña.");
+        else if (pass != "" && pass.length < 6) errores.push("Contraseña mínima 6 caracteres.");
         if (rol === "0") errores.push("Debes seleccionar un rol.");
-        if (!archivo) errores.push("Falta la foto del usuario.");
+        //if (!archivo) errores.push("Falta la foto del usuario.");
 
         if (errores.length > 0) {
             mensaje.innerHTML = errores.map(e => `<p>${e}</p>`).join("");
@@ -66,9 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Preparar envío con FormData
         const formData = new FormData(form);
+        formData.append("accion", "actualizar");
+
 
         try {
-            const response = await fetch("procesar_alta.php", {
+            const response = await fetch("procesar_editar.php", {
                 method: "POST",
                 body: formData
             });
@@ -92,10 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Limpiar formulario si fue exitoso
             if (data.success) {
-                form.reset();
-                form.id.placeholder = data.nuevo_id;
-                previewImg.style.display = "none";
-                previewText.style.display = "block"; // Resetear preview
                 setTimeout(() => {
                         window.location.href = data.redirect;
                 }, 1000);

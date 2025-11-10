@@ -9,15 +9,15 @@
         <script>
             const empleadoId = <?php echo json_encode($_POST['empleado_id'] ?? ''); ?>;
         </script>
-        <script src="empleados_detalle.js" defer></script>
+        <script src="empleados_eliminar.js" defer></script>
     </head>
 
     <body>
         <div class="container" >
-            <H1>Detalle</H1>
+            <H1>Eliminar</H1>
             <form 
-                id="Form_detalle"
-                name="Form_detalle" 
+                id="form_eliminar"
+                name="form_eliminar" 
                 method="post"   
                 enctype="multipart/form-data"
             >
@@ -37,7 +37,7 @@
                     <span id="preview-text">No hay imagen</span>
                     <img id="preview-img" src="" alt="Vista previa" style="display:none;">
                 </div>
-
+                <button type="submit">Eliminar</button>
                 <button type="button" onclick="window.location.href='empleados_lista.php'">Volver</button>
 
             </form>
