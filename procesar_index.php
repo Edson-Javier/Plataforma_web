@@ -28,7 +28,7 @@ if ($resultado && count($resultado) > 0) {
         echo json_encode([
             'success' => true,
             'message' => 'Login correcto',
-            'redirect' => 'empleados_lista.php'
+            'redirect' => 'empleados/empleados_lista.php'
         ]);
     } else {
         echo json_encode([
@@ -39,7 +39,7 @@ if ($resultado && count($resultado) > 0) {
 } else {
     echo json_encode([
         'success' => false,
-        'message' => 'Correo o contraseña incorrectos'
+        'message' => 'El usuario esta dado de baja en el sistema'
     ]);
 }
 exit;

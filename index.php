@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Listado de empleados</title>
-        <link rel="stylesheet" href="empleados_formulario.css">
+        <link rel="stylesheet" href="index.css">
         <script src="index.js" defer></script>
     </head>
     <body>
