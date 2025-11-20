@@ -25,10 +25,12 @@ if ($resultado && count($resultado) > 0) {
     $hashGuardado = $resultado[0]['pass'];
 
     if (password_verify($_POST['pass'], $hashGuardado)) {
+        session_start();
+        $_SESSION['usuario'] = $correo;
         echo json_encode([
             'success' => true,
             'message' => 'Login correcto',
-            'redirect' => 'empleados/empleados_lista.php'
+            'redirect' => 'sidebar.php'
         ]);
     } else {
         echo json_encode([
