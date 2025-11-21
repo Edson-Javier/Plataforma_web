@@ -23,7 +23,7 @@ require_once __DIR__ . "/Conexion/funciones/auth.php";
         </div>
 
         <ul class="sidebar-menu">
-            <li><a href="#" onclick="cargarContenido('inicio.html')">Inicio</a></li>
+            <li><a href="#" onclick="cargarContenido('inicio.php')">Inicio</a></li>
             <li><a href="#" onclick="cargarContenido('empleados/empleados_lista.php')">Empleados</a></li>
             <li><a href="#" onclick="cargarContenido('#')">Productos</a></li>
             <li><a href="#" onclick="cargarContenido('#')">Promociones</a></li>
@@ -36,9 +36,8 @@ require_once __DIR__ . "/Conexion/funciones/auth.php";
 
     <button id="toggleSidebar" class="toggle-btn">☰</button>
 
-    <!-- Contenedor principal para el contenido -->
     <div id="main-content">
-        <iframe id="contenidoFrame" name="contenidoFrame" src="inicio.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+        <iframe id="contenidoFrame" name="contenidoFrame" src="inicio.php" style="width: 100%; height: 100vh; border: none;"></iframe>
     </div>
 
     <script>

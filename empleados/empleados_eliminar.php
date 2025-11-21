@@ -1,3 +1,6 @@
+<?php
+    require_once __DIR__ . "/../Conexion/funciones/auth.php";
+?>
 <html lang="es">
     <head>
         <meta charset="UTF-8">

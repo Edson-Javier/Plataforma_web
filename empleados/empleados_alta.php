@@ -4,7 +4,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once __DIR__ . "/../Conexion/funciones/utilidades.php"; 
+require_once __DIR__ . "/../Conexion/funciones/utilidades.php";
+require_once __DIR__ . "/../Conexion/funciones/auth.php"; 
 
 $tabla = "lista";
 $id = id_nuevo($tabla);
