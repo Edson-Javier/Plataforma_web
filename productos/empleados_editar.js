@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     formData.append("id", empleadoId);
 
     try {
-        const response = await fetch("procesar_eliminar.php", {
+        const response = await fetch("procesar_editar.php", {
             method: "POST",
             body: formData
         });
@@ -26,11 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("nombre").value = data.nombre || "";
         document.getElementById("apellido").value = data.apellido || "";
         document.getElementById("correo").value = data.correo || "";
-        if (data.eliminar == 0) {
-         document.getElementById("estado").value = "Estado : ACTIVO" || "";   
-        }else{
-            document.getElementById("estado").value = "Estado : INACTIVO" || "";
-        }
+
         document.getElementById("rol").value = data.rol || "0";
 
         // Mostrar imagen
@@ -50,33 +46,82 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error al obtener datos:", err);
     }
 });
+
+
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("form_eliminar");
+    const form = document.getElementById("form_editar");
     const mensaje = document.getElementById("mensaje");
-    
+
+    // --- Mostrar / ocultar contraseña ---
+    const passInput = document.getElementById("pass");
+    const mostrarPass = document.getElementById("mostrarpass");
+
+    if (mostrarPass && passInput) {
+        mostrarPass.addEventListener("change", () => {
+            passInput.type = mostrarPass.checked ? "text" : "password";
+        });
+    }
+
+    // --- Previsualización de imagen ---
+    const archivoInput = document.getElementById("archivo");
+    const previewImg = document.getElementById("preview-img");
+    const previewText = document.getElementById("preview-text");
+
+    archivoInput.addEventListener("change", () => {
+        const file = archivoInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                previewImg.src = e.target.result;
+                previewImg.style.display = "block";
+                previewText.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewImg.style.display = "none";
+            previewText.style.display = "block";
+        }
+    });
+
+    // --- Envío del formulario con AJAX ---
     form.addEventListener("submit", async (e) => {
         e.preventDefault(); // Evita el envío normal
         mensaje.innerHTML = "";
 
-        const id = form.querySelector("#id").value.trim();
+        // Obtener valores
+        const id       = form.querySelector("#id").value.trim();
+        const nombre   = form.nombre.value.trim();
+        const apellido = form.apellido.value.trim();
+        const correo   = form.correo.value.trim();
+        const pass     = form.pass.value.trim();
+        const rol      = form.rol.value;
+        const archivo  = form.archivo.value;
 
-        if (!id) {
-            mensaje.innerHTML = "<p>No se encontró el ID del registro.</p>";
+        // Validación de campos
+        const errores = [];
+        if (!nombre) errores.push("Falta el nombre.");
+        if (!apellido) errores.push("Falta el apellido.");
+        if (!correo) errores.push("Falta el correo.");
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) errores.push("Correo inválido.");
+        //if (!pass) errores.push("Falta la contraseña.");
+        else if (pass != "" && pass.length < 6) errores.push("Contraseña mínima 6 caracteres.");
+        if (rol === "0") errores.push("Debes seleccionar un rol.");
+        //if (!archivo) errores.push("Falta la foto del usuario.");
+
+        if (errores.length > 0) {
+            mensaje.innerHTML = errores.map(e => `<p>${e}</p>`).join("");
             mensaje.classList.add("error-mensaje");
+            setTimeout(() => mensaje.innerHTML = "", 5000);
             return;
         }
-        
-        const confirmar = confirm("¿Estás seguro de que deseas eliminar este empleado?");
-        if (!confirmar) {
-            return; // Si el usuario cancela, no hace nada
-        }
-        const formData = new FormData();
-        formData.append("accion", "eliminar");
-        formData.append("id", id);
+
+        // Preparar envío con FormData
+        const formData = new FormData(form);
+        formData.append("accion", "actualizar");
 
 
         try {
-            const response = await fetch("procesar_eliminar.php", {
+            const response = await fetch("procesar_editar.php", {
                 method: "POST",
                 body: formData
             });
@@ -92,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 mensaje.classList.add("error-mensaje");
                 return;
             }
+
 
             // Mostrar resultado
             mensaje.innerHTML = `<p>${data.message}</p>`;

@@ -25,7 +25,7 @@ require_once __DIR__ . "/Conexion/funciones/auth.php";
         <ul class="sidebar-menu">
             <li><a href="#" onclick="cargarContenido('inicio.php')">Inicio</a></li>
             <li><a href="#" onclick="cargarContenido('empleados/empleados_lista.php')">Empleados</a></li>
-            <li><a href="#" onclick="cargarContenido('#')">Productos</a></li>
+            <li><a href="#" onclick="cargarContenido('productos/empleados_lista.php')">Productos</a></li>
             <li><a href="#" onclick="cargarContenido('#')">Promociones</a></li>
             <li><a href="#" onclick="cargarContenido('#')">Pedidos</a></li>
             
