@@ -1,5 +1,5 @@
 // Capturar filas de la tabla
-const filas = document.querySelectorAll('#tablaEmpleados tbody tr');
+const filas = document.querySelectorAll('#tablaProductos tbody tr');
 
 // Inputs ocultos de los formularios
 const detalleInput = document.getElementById('detalle_id');
@@ -23,10 +23,10 @@ filas.forEach(fila => {
 
 function verificarSeleccion(formId) {
     const form = document.getElementById(formId);
-    const input = form.querySelector('input[name="empleado_id"]');
+    const input = form.querySelector('input[name="producto_id"]');
 
     if (!input.value) {
-        alert("Por favor selecciona un empleado primero.");
+        alert("Por favor selecciona un producto primero.");
         return false;
     }
     return true;

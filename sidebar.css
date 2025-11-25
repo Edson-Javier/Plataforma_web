@@ -32,11 +32,16 @@
     z-index: 1000;
     border-right: 1px solid var(--border-light);
     overflow-y: auto;
+    /* Aseguramos que esté completamente oculta por defecto */
+    visibility: hidden;
+    opacity: 0;
 }
 
 /* Cuando está abierta */
 .sidebar.open {
     left: 0;
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Header de la barra lateral */

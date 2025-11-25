@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    if (!empleadoId) {
+    if (!productoId) {
         console.error("No se recibió ningún ID desde PHP");
         return;
     }
 
     const formData = new FormData();
-    formData.append("id", empleadoId);
+    formData.append("id", productoId);
 
     try {
         const response = await fetch("procesar_detalle.php", {
@@ -23,21 +23,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Llenar el formulario
         document.getElementById("id").value = data.id || "";
         document.getElementById("nombre").value = data.nombre || "";
-        document.getElementById("apellido").value = data.apellido || "";
-        document.getElementById("correo").value = data.correo || "";
+        document.getElementById("codigo").value = data.codigo || "";
+        document.getElementById("costo").value = data.costo || "";
+        document.getElementById("stock").value = data.stock || "";
+        document.getElementById("descripcion").value = data.descripcion || "";
+        document.getElementById("status").value = data.status || "";
+        
         if (data.eliminar == 0) {
          document.getElementById("estado").value = "Estado : ACTIVO" || "";   
         }else{
             document.getElementById("estado").value = "Estado : INACTIVO" || "";
         }
-        document.getElementById("rol").value = data.rol || "0";
 
         // Mostrar imagen
         const previewImg = document.getElementById("preview-img");
         const previewText = document.getElementById("preview-text");
 
         if (data.imagen) {
-            previewImg.src = `../archivos/empleados/${data.imagen}`;
+            previewImg.src = `../archivos/productos/${data.imagen}`;
             previewImg.style.display = "block";
             previewText.style.display = "none";
         } else {

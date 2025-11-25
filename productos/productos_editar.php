@@ -1,31 +1,26 @@
 <?php
-
-//Funcion a llamar de este archivo
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-require_once __DIR__ . "/../Conexion/funciones/utilidades.php";
-require_once __DIR__ . "/../Conexion/funciones/auth.php"; 
-
-$tabla = "productos";
-$id = id_nuevo($tabla);
-
+    require_once __DIR__ . "/../Conexion/funciones/auth.php";
 ?>
-
 <html lang="es">
     <head>
         <meta charset="UTF-8">
         <title>Formularios</title>
         <link rel="stylesheet" href="productos_formulario.css">
-        <script src="productos_alta.js" defer></script>
+        <?php
+            $producto_id = $_POST['producto_id'] ?? null;
+        ?>
+        <script>
+            const productoId = <?php echo json_encode($_POST['producto_id'] ?? ''); ?>;
+        </script>
+        <script src="productos_editar.js" defer></script>
     </head>
 
     <body>
         <div class="container" >
-            <H1>Alta</H1>
+            <H1>Editar</H1>
             <form 
-                id="Form_alta"
-                name="Form_alta" 
+                id="form_editar"
+                name="form_editar" 
                 method="post"   
                 enctype="multipart/form-data"
             >
@@ -51,7 +46,7 @@ $id = id_nuevo($tabla);
                 <input type="text" name="descripcion" id="descripcion" placeholder="Escribe su descripcion"><br>
 
 
-                <button type="submit">Crear</button>
+                <button type="submit">Editar</button>
                 <button type="button" onclick="window.location.href='productos_lista.php'">Volver</button>
 
             </form>

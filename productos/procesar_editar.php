@@ -20,57 +20,54 @@ switch ($accion) {
             exit;
         }
 
-        $id = intval($_POST["id"]);
-        $tabla = "lista";
-        $columnas = ["id", "nombre", "apellido", "correo", "rol", "imagen"];
+        $id        = intval($_POST["id"]);
+        $tabla     = "productos";
+        $columnas  = ["id", "nombre", "codigo", "costo", "stock", "imagen", "descripcion"];
         $condicion = "id = '$id'";
 
-        $empleado = obtener_campos($tabla, $columnas, $condicion);
+        $producto  = obtener_campos($tabla, $columnas, $condicion);
 
-        if ($empleado && count($empleado) > 0) {
-            echo json_encode($empleado[0]); 
+        if ($producto && count($producto) > 0) {
+            echo json_encode($producto[0]); 
         } else {
-            echo json_encode(["error" => "Empleado no encontrado"]);
+            echo json_encode(["error" => "Producto no encontrado"]);
         }
         exit;
 
     case 'actualizar':
 
         //  Subir archivo y obtener nombre nuevo
-        $ruta = __DIR__ . "/../archivos/empleados";
+        $ruta = __DIR__ . "/../archivos/productos/";
 
         $nombreArchivo = guardar_archivo('archivo', $ruta );
 
         // Recibir el resto de datos del formulario
-        $tabla    = "lista";
-        $id       = intval($_POST["id"]);
-        $nombre   = $_POST['nombre'] ?? '';
-        $apellido = $_POST['apellido'] ?? '';
-        $correo   = $_POST['correo'] ?? '';
-        $pass     = $_POST['pass'] ?? '';
-        $rol      = $_POST['rol'] ?? 0;
+        $tabla      = "productos";
+        $id         = intval($_POST["id"]);
+        $nombre     = $_POST['nombre'] ?? '';
+        $codigo     = $_POST['codigo'] ?? '';
+        $costo      = $_POST['costo'] ?? '';
+        $stock      = $_POST['stock'] ?? '';
+        $descripcion= $_POST['descripcion'] ?? '';
 
-        $columna   = ["correo"];
-        $condicion =  "correo = '$correo' AND id != '$id' ";
+        $columna   = ["codigo"];
+        $condicion =  "codigo = '$codigo' AND id != '$id' ";
 
         $verificacion = obtener_campos($tabla, $columna , $condicion); 
 
         if (count($verificacion) > 0) {
             echo json_encode([
                 "success" => false,
-                "message" => "El correo '$correo' ya está registrado. Intenta con otro."
+                "message" => "El codigo '$codigo' ya está registrado. Intenta con otro."
             ]);
             exit;
         }
         //  Insertar en la base de datos
         $condicion_col = "id"; 
         $condicion_val = $id;
-        $columnas = ["nombre", "apellido", "correo", "rol"];
-        $valores  = [$nombre, $apellido, $correo, $rol];
-        if (!empty($_POST['pass'])) {
-            $columnas[] = "pass";
-            $valores[]  = password_hash($pass, PASSWORD_BCRYPT);
-        }
+        $columnas = ["nombre", "codigo", "costo", "stock", "descripcion"];
+        $valores  = [$nombre, $codigo, $costo, $stock, $descripcion];
+
         if (!empty($nombreArchivo)) {
             $columnas[] = "imagen";
             $valores[]  = $nombreArchivo;
@@ -81,7 +78,7 @@ switch ($accion) {
             echo json_encode ([
                 "success" => true,
                 "message" => "Registro actualizado correctamente",
-                'redirect' => 'empleados_lista.php'
+                'redirect' => 'productos_lista.php'
             ]);
         }else {
             echo json_encode ([

@@ -29,10 +29,15 @@ $id = id_nuevo($tabla);
                 method="post"   
                 enctype="multipart/form-data"
             >
+                <p>ID:</p>
                 <input type="text" name="id" id="id" placeholder="<?php echo $id; ?>"  readonly><br>
+                <p>Nombre:</p>
                 <input type="text" name="nombre" id="nombre" placeholder="Escribe tu nombre"><br>
+                <p>Apellido:</p>
                 <input type="text" name="apellido" id="apellido" placeholder="Escribe tu apellido"><br>
+                <p>Correo:</p>
                 <input type="text" name="correo" id="correo" placeholder="Escribe tu correo"><br>
+                <p>Contraseña:</p>
                 <input type="password" name="pass" id="pass" placeholder="Escribe tu contraseña"><br>
                 <div class="checkbox-container">
                 <label class="checkbox-label">
@@ -42,12 +47,13 @@ $id = id_nuevo($tabla);
                 </label>
                 </div>
 
+                <p>Rol:</p>
                 <select name="rol" id="rol">
                     <option value="0">Selecciona</option>
                     <option value="1">Ejecutivo</option>
                     <option value="2">Gerente</option>
                 </select><br>
-
+                <p>Foto</p>
                 <div id="preview-container">
                     <span id="preview-text">No hay imagen</span>
                     <img id="preview-img" src="" alt="Vista previa" style="display:none;">
@@ -56,7 +62,7 @@ $id = id_nuevo($tabla);
                 <!-- Campo para subir archivo -->
                 <input type="file" name="archivo" id="archivo" accept="image/*"><br><br>
 
-                <button type="submit">Enviar</button>
+                <button type="submit">Crear</button>
                 <button type="button" onclick="window.location.href='empleados_lista.php'">Volver</button>
 
             </form>

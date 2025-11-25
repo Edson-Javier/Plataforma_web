@@ -13,7 +13,7 @@ require_once __DIR__ . "/../Conexion/funciones/obtener.php";
 $tabla = "lista";
 
 //  Subir archivo y obtener nombre nuevo
-$ruta = __DIR__ . "/../archivos/empleados";
+$ruta = __DIR__ . "/../archivos/empleados/";
 
 $nombreArchivo = guardar_archivo('archivo', $ruta );
 

@@ -24,10 +24,15 @@
                 method="post"   
                 enctype="multipart/form-data"
             >
+                <p>ID:</p>
                 <input type="text" name="id" id="id" placeholder=""  readonly><br>
+                <p>Nombre:</p>
                 <input type="text" name="nombre" id="nombre" placeholder="" ><br>
+                <p>Apellido:</p>
                 <input type="text" name="apellido" id="apellido" placeholder="" ><br>
+                <p>Correo:</p>
                 <input type="text" name="correo" id="correo" placeholder="" ><br>
+                <p>Contraseña:</p>
                 <input type="password" name="pass" id="pass" placeholder="Escribe tu contraseña"><br>
                 <div class="checkbox-container">
                 <label class="checkbox-label">
@@ -36,13 +41,13 @@
                     Mostrar contraseña
                 </label>
                 </div>
-
+                <p>Rol:</p>
                 <select name="rol" id="rol" >
                     <option value="0">Selecciona</option>
                     <option value="1">Ejecutivo</option>
                     <option value="2">Gerente</option>
                 </select><br>
-
+                <p>Foto</p>
                 <div id="preview-container">
                     <span id="preview-text">No hay imagen</span>
                     <img id="preview-img" src="" alt="Vista previa" style="display:none;">

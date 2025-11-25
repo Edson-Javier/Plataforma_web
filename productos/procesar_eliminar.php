@@ -19,16 +19,16 @@ switch ($accion) {
         }
 
         $id        = intval($_POST["id"]);
-        $tabla     = "lista";
-        $columnas  = ["id", "nombre", "apellido", "correo", "rol", "imagen", "eliminar"];
+        $tabla     = "productos";
+        $columnas  = ["id", "nombre", "codigo", "costo", "stock", "imagen", "descripcion", "status", "eliminar"];
         $condicion = "id = '$id'";
 
-        $empleado = obtener_campos($tabla, $columnas, $condicion);
+        $producto  = obtener_campos($tabla, $columnas, $condicion);
 
-        if ($empleado && count($empleado) > 0) {
-            echo json_encode($empleado[0]); 
+        if ($producto && count($producto) > 0) {
+            echo json_encode($producto[0]); 
         } else {
-            echo json_encode(["error" => "Empleado no encontrado"]);
+            echo json_encode(["error" => "Producto no encontrado"]);
         }
         exit;
     case 'eliminar':
@@ -36,7 +36,7 @@ switch ($accion) {
             echo json_encode(["error" => "ID no recibido"]);
             exit;
         }
-        $tabla         = "lista";
+        $tabla         = "productos";
         $id            = intval($_POST["id"]);
         $columnas      = ["eliminar"];
         $valores       = ["1"];
@@ -48,7 +48,7 @@ switch ($accion) {
             echo json_encode ([
                 "success" => true,
                 "message" => "Registro eliminado correctamente",
-                'redirect' => 'empleados_lista.php'
+                'redirect' => 'productos_lista.php'
             ]);
         }else {
             echo json_encode([

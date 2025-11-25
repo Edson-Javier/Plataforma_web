@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    if (!empleadoId) {
+    if (!productoId) {
         console.error("No se recibió ningún ID desde PHP");
         return;
     }
 
     const formData = new FormData();
     formData.append("accion", "obtener");
-    formData.append("id", empleadoId);
+    formData.append("id", productoId);
 
     try {
         const response = await fetch("procesar_editar.php", {
@@ -24,17 +24,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Llenar el formulario
         document.getElementById("id").value = data.id || "";
         document.getElementById("nombre").value = data.nombre || "";
-        document.getElementById("apellido").value = data.apellido || "";
-        document.getElementById("correo").value = data.correo || "";
-
-        document.getElementById("rol").value = data.rol || "0";
+        document.getElementById("codigo").value = data.codigo || "";
+        document.getElementById("costo").value = data.costo || "";
+        document.getElementById("stock").value = data.stock || "";
+        document.getElementById("descripcion").value = data.descripcion || "";
 
         // Mostrar imagen
         const previewImg = document.getElementById("preview-img");
         const previewText = document.getElementById("preview-text");
 
         if (data.imagen) {
-            previewImg.src = `../archivos/empleados/${data.imagen}`;
+            previewImg.src = `../archivos/productos/${data.imagen}`;
             previewImg.style.display = "block";
             previewText.style.display = "none";
         } else {
@@ -51,16 +51,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form_editar");
     const mensaje = document.getElementById("mensaje");
-
-    // --- Mostrar / ocultar contraseña ---
-    const passInput = document.getElementById("pass");
-    const mostrarPass = document.getElementById("mostrarpass");
-
-    if (mostrarPass && passInput) {
-        mostrarPass.addEventListener("change", () => {
-            passInput.type = mostrarPass.checked ? "text" : "password";
-        });
-    }
 
     // --- Previsualización de imagen ---
     const archivoInput = document.getElementById("archivo");
@@ -89,24 +79,22 @@ document.addEventListener("DOMContentLoaded", () => {
         mensaje.innerHTML = "";
 
         // Obtener valores
-        const id       = form.querySelector("#id").value.trim();
-        const nombre   = form.nombre.value.trim();
-        const apellido = form.apellido.value.trim();
-        const correo   = form.correo.value.trim();
-        const pass     = form.pass.value.trim();
-        const rol      = form.rol.value;
-        const archivo  = form.archivo.value;
+        const id          = form.querySelector("#id").value.trim();
+        const nombre      = form.nombre.value.trim();
+        const codigo      = form.codigo.value.trim();
+        const costo       = form.costo.value.trim();
+        const stock       = form.stock.value.trim();
+        const archivo     = form.archivo.value;
+        const descripcion = form.descripcion.value.trim
 
         // Validación de campos
         const errores = [];
-        if (!nombre) errores.push("Falta el nombre.");
-        if (!apellido) errores.push("Falta el apellido.");
-        if (!correo) errores.push("Falta el correo.");
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) errores.push("Correo inválido.");
-        //if (!pass) errores.push("Falta la contraseña.");
-        else if (pass != "" && pass.length < 6) errores.push("Contraseña mínima 6 caracteres.");
-        if (rol === "0") errores.push("Debes seleccionar un rol.");
-        //if (!archivo) errores.push("Falta la foto del usuario.");
+        if (!nombre)      errores.push("Falta el nombre.");
+        if (!codigo)      errores.push("Falta el codigo.");
+        if (!costo)       errores.push("Falta el costo.");
+        if (!stock)       errores.push("Falta el numero de existencia.");
+        //if (!archivo)     errores.push("Falta la imagen del producto.");
+        if (!descripcion) errores.push("Debes de brindar una descripcion.");
 
         if (errores.length > 0) {
             mensaje.innerHTML = errores.map(e => `<p>${e}</p>`).join("");

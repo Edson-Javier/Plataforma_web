@@ -13,7 +13,7 @@ require_once __DIR__ . "/../Conexion/funciones/obtener.php";
 $tabla = "productos";
 
 //  Subir archivo y obtener nombre nuevo
-$ruta = __DIR__ . "/../archivos/productos";
+$ruta = __DIR__ . "/../archivos/productos/";
 
 $nombreArchivo = guardar_archivo('archivo', $ruta );
 
@@ -21,11 +21,11 @@ $nombreArchivo = guardar_archivo('archivo', $ruta );
 $nombre     = $_POST['nombre'] ?? '';
 $codigo     = $_POST['codigo'] ?? '';
 $costo      = $_POST['costo'] ?? '';
-$stock      = $_POST['stock'], ?? '';
-$descripcion= $_POST['descripcion'] ?? 0;
+$stock      = $_POST['stock'] ?? '';
+$descripcion= $_POST['descripcion'] ?? '';
 
 $columna   = ["codigo"];
-$condicion =  "codigo = '$codigo' AND eliminado = 0";
+$condicion =  "codigo = '$codigo' AND eliminar = 0";
 
 $verificacion = obtener_campos($tabla, $columna , $condicion); 
 
