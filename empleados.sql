@@ -66,7 +66,7 @@ CREATE TABLE `productos` (
   `codigo` varchar(100) NOT NULL,
   `costo` double NOT NULL DEFAULT 0,
   `stock` int(11) NOT NULL DEFAULT 0,
-  `image` varchar(255) NOT NULL,
+  `imagen` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
   `eliminado` int(11) NOT NULL DEFAULT 0
