@@ -185,3 +185,69 @@ button:hover {
 .checkbox-label input:checked + .checkmark::after {
     display: block;
 }
+
+/* ========================= */
+/* FORMULARIO EMPLEADOS */
+/* ========================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+/* Grupo base */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+/* Inputs */
+.form-group input,
+.form-group select {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #0078d7;
+    box-shadow: 0 0 0 2px rgba(0,120,215,.15);
+}
+
+/* ========================= */
+/* CONTROL DE ANCHO */
+/* ========================= */
+
+/* Ocupa todo el renglón */
+.full {
+    grid-column: span 12;
+}
+
+/* Media fila */
+.half {
+    grid-column: span 6;
+}
+
+/* Un tercio */
+.one-third {
+    grid-column: span 3;
+}
+
+/* Dos tercios */
+.two-thirds {
+    grid-column: span 8;
+}

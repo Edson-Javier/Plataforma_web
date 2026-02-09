@@ -22,52 +22,79 @@ $id = id_nuevo($tabla);
 
     <body>
         <div class="container" >
+
             <H1>Alta</H1>
+            
             <form 
                 id="Form_alta"
                 name="Form_alta" 
                 method="post"   
                 enctype="multipart/form-data"
             >
-                <p>ID:</p>
-                <input type="text" name="id" id="id" placeholder="<?php echo $id; ?>"  readonly><br>
-                <p>Nombre:</p>
-                <input type="text" name="nombre" id="nombre" placeholder="Escribe tu nombre"><br>
-                <p>Apellido:</p>
-                <input type="text" name="apellido" id="apellido" placeholder="Escribe tu apellido"><br>
-                <p>Correo:</p>
-                <input type="text" name="correo" id="correo" placeholder="Escribe tu correo"><br>
-                <p>Contraseña:</p>
-                <input type="password" name="pass" id="pass" placeholder="Escribe tu contraseña"><br>
-                <div class="checkbox-container">
-                <label class="checkbox-label">
-                    <input type="checkbox" id="mostrarpass">
-                    <span class="checkmark"></span>
-                    Mostrar contraseña
-                </label>
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label>ID:</label>
+                        <input type="text" name="id" id="id" placeholder="<?php echo $id; ?>"  readonly>
+                    </div>
+
+                    <div class = "form-group half">
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Escribe tu nombre">
+                    </div>
+                    
+                    <div class="form-group half">
+                        <label>Apellido:</label>
+                        <input type="text" name="apellido" id="apellido" placeholder="Escribe tu apellido">
+                    </div>
+                    
+                    <div class="form-group half">
+                        <label>Correo:</label>
+                        <input type="text" name="correo" id="correo" placeholder="Escribe tu correo">
+                    </div>
+                    
+                    <div class="form-group half">
+                        <label>Contraseña:</label>
+                        <input type="password" name="pass" id="pass" placeholder="Escribe tu contraseña">
+                        <div class="checkbox-container">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="mostrarpass">
+                            <span class="checkmark"></span>
+                            Mostrar contraseña
+                        </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group half">
+                        <label>Rol:</label>
+                        <select name="rol" id="rol">
+                            <option value="0">Selecciona</option>
+                            <option value="1">Ejecutivo</option>
+                            <option value="2">Gerente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group half">
+                        <label>Foto</label>
+                        <div id="preview-container">
+                            <span id="preview-text">No hay imagen</span>
+                            <img id="preview-img" src="" alt="Vista previa" style="display:none;">
+                        </div>
+
+                        <!-- Campo para subir archivo -->
+                        <input type="file" name="archivo" id="archivo" accept="image/*">
+                    </div>
+
                 </div>
-
-                <p>Rol:</p>
-                <select name="rol" id="rol">
-                    <option value="0">Selecciona</option>
-                    <option value="1">Ejecutivo</option>
-                    <option value="2">Gerente</option>
-                </select><br>
-                <p>Foto</p>
-                <div id="preview-container">
-                    <span id="preview-text">No hay imagen</span>
-                    <img id="preview-img" src="" alt="Vista previa" style="display:none;">
-                </div>
-
-                <!-- Campo para subir archivo -->
-                <input type="file" name="archivo" id="archivo" accept="image/*"><br><br>
-
                 <button type="submit">Crear</button>
                 <button type="button" onclick="window.location.href='empleados_lista.php'">Volver</button>
 
             </form>
+
         </div>
+
         <div id="mensaje"></div>
+    
     </body>
 
 </html>
